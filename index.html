@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Radio Online</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: #1e1e1e;
+      color: white;
+      padding: 1em 0;
+    }
+    audio {
+      margin-top: 20px;
+    }
+    .chat {
+      margin: 2em auto;
+      width: 90%;
+      max-width: 500px;
+      background: white;
+      padding: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #messages {
+      height: 200px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 1em;
+      text-align: left;
+    }
+    input, button {
+      padding: 0.5em;
+      margin-top: 0.5em;
+      width: 80%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>?? Mi Radio Online</h1>
+    <audio controls autoplay>
+      <source src="https://server.radiostreaming.com.ar/8290/stream" type="audio/mpeg">
+      Tu navegador no soporta el reproductor de audio.
+    </audio>
+  </header>
+
+  <div class="chat">
+    <h2>?? Chat en Vivo</h2>
+    <div id="messages"></div>
+    <input type="text" id="username" placeholder="Tu nombre" />
+    <input type="text" id="message" placeholder="Escribe tu mensaje..." />
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+
+    function sendMessage() {
+      const username = document.getElementById("username").value;
+      const message = document.getElementById("message").value;
+      if(username && message){
+        const newMsg = document.createElement("p");
+        newMsg.innerHTML = `<strong>${username}:</strong> ${message}`;
+        messagesDiv.appendChild(newMsg);
+        document.getElementById("message").value = "";
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    }
+  </script>
+
+</body>
+</html>
